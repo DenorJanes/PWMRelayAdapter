@@ -1,0 +1,12 @@
+[Unit]
+Description=Adapter to convert sokil relay signal to pwm based relay signal
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/root/sova_relay/venv/bin/python3.11 /root/sova_relay/pwm_relay_to_sokil_adapter.py
+Restart=on-failure
+User=root
+
+[Install]
+WantedBy=multi-user.target

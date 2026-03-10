@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+# ignore editor lock and swap files
+.lgd-nfy0
+*.swp
