@@ -29,6 +29,13 @@ echo "[*] Installing Python requirements..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
+# make the project importable by installing it into the venv
+# an editable install lets us edit the source without reinstalling
+if [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
+    echo "[*] Installing project package (editable)"
+    pip install -e .
+fi
+
 # install systemd unit
 if [ -f "systemd/$SERVICE_NAME" ]; then
     echo "[*] Installing systemd service unit..."
@@ -41,4 +48,7 @@ else
     echo "[!] Service file systemd/$SERVICE_NAME not found, skipping systemd setup."
 fi
 
-echo "[*] Setup complete. To run manually use: python -m sova_relay"
+echo "[*] Setup complete. To run manually from the project root:
+# activate the virtualenv first
+source \"$VENV_DIR/bin/activate\"
+python -m sova_relay"
