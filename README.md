@@ -17,9 +17,9 @@ chmod +x install.sh       # only needed once if permissions were lost
 It will:
 
 1. Create/activate a `.venv` directory if needed
-2. Install Python dependencies from `requirements.txt`
-3. Install the project package into the venv (so `python -m sova_relay` works)
-4. Copy the unit file, reload systemd, enable and start the service
+2. Upgrade `pip` and install the project (along with all dependencies from
+   `pyproject.toml`)
+3. Copy the unit file, reload systemd, enable and start the service
 
 You can run the adapter manually with:
 
@@ -27,6 +27,7 @@ You can run the adapter manually with:
 # after running install.sh or installing the package yourself
 # (be sure to activate the virtual environment first)
 source .venv/bin/activate    # or "venv" depending on your shell
+# verbosity can be adjusted via SOVA_RELAY_LOG_LEVEL
 python -m sova_relay
 ```
 

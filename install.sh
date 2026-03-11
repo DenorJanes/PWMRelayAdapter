@@ -25,16 +25,13 @@ fi
 # activate and install
 # shellcheck disable=SC1090
 source "$VENV_DIR/bin/activate"
-echo "[*] Installing Python requirements..."
-pip install --upgrade pip
-pip install -r requirements.txt
 
-# make the project importable by installing it into the venv
-# an editable install lets us edit the source without reinstalling
-if [ -f "pyproject.toml" ] || [ -f "setup.py" ]; then
-    echo "[*] Installing project package (editable)"
-    pip install -e .
-fi
+# upgrade pip and install the package (editable). this pulls in all
+# dependencies declared in pyproject.toml; requirements.txt is no longer
+# required.
+echo "[*] Upgrading pip and installing package + dependencies..."
+pip install --upgrade pip
+pip install -e .
 
 # install systemd unit
 if [ -f "systemd/$SERVICE_NAME" ]; then
@@ -51,4 +48,5 @@ fi
 echo "[*] Setup complete. To run manually from the project root:
 # activate the virtualenv first
 source \"$VENV_DIR/bin/activate\"
+# you can control verbosity with SOVA_RELAY_LOG_LEVEL (e.g. DEBUG)
 python -m sova_relay"
